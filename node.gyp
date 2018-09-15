@@ -792,9 +792,7 @@
       'includes': [ 'node.gypi', ],
 
       'include_dirs': [
-        'src',
         'tools/msvs/genfiles',
-        'deps/v8/include',
         'deps/cares/include',
         'deps/uv/include',
       ],
