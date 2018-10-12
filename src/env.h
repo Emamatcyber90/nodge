@@ -633,7 +633,9 @@ class Environment {
   void StopProfilerIdleNotifier();
   inline bool profiler_idle_notifier_started() const;
 
-  inline v8::Isolate* isolate() const;
+  v8::Isolate* isolate() const {
+    return isolate_;
+  }
   inline uv_loop_t* event_loop() const;
   inline uint32_t watched_providers() const;
 
@@ -820,8 +822,8 @@ class Environment {
 #undef VP
 
 #define V(PropertyName, TypeName)                                             \
-  inline v8::Local<TypeName> PropertyName() const;                            \
-  inline void set_ ## PropertyName(v8::Local<TypeName> value);
+  v8::Local<TypeName> PropertyName() const;                                   \
+  void set_ ## PropertyName(v8::Local<TypeName> value);
   ENVIRONMENT_STRONG_PERSISTENT_PROPERTIES(V)
 #undef V
 

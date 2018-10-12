@@ -184,13 +184,25 @@ class ListHead {
   DISALLOW_COPY_AND_ASSIGN(ListHead);
 };
 
+template <typename Inner, typename Outer>
+constexpr uintptr_t OffsetOf(Inner Outer::*field) {
+  return reinterpret_cast<uintptr_t>(&(static_cast<Outer*>(0)->*field));
+}
+
 // The helper is for doing safe downcasts from base types to derived types.
 template <typename Inner, typename Outer>
 class ContainerOfHelper {
  public:
-  inline ContainerOfHelper(Inner Outer::*field, Inner* pointer);
-  template <typename TypeName>
-  inline operator TypeName*() const;
+  ContainerOfHelper(Inner Outer::* field, Inner* pointer)
+    : pointer_(
+               reinterpret_cast<Outer*>(
+                 reinterpret_cast<uintptr_t>(pointer) - OffsetOf(field))) {
+  }
+
+  template <class TypeName>
+  constexpr operator TypeName*() const {
+    return static_cast<TypeName*>(pointer_);
+  }
  private:
   Outer* const pointer_;
 };
@@ -202,22 +214,26 @@ constexpr ContainerOfHelper<Inner, Outer> ContainerOf(Inner Outer::*field,
                                                       Inner* pointer);
 
 // Convenience wrapper around v8::String::NewFromOneByte().
-inline v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
-                                           const char* data,
-                                           int length = -1);
+v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
+                                    const char* data,
+                                    int length = -1);
 
 // For the people that compile with -funsigned-char.
-inline v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
-                                           const signed char* data,
-                                           int length = -1);
+v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
+                                    const signed char* data,
+                                    int length = -1);
 
-inline v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
-                                           const unsigned char* data,
-                                           int length = -1);
+v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
+                                    const unsigned char* data,
+                                    int length = -1);
 
 // Used to be a macro, hence the uppercase name.
 template <int N>
+#if __cpp_constexpr < 201603
 inline v8::Local<v8::String> FIXED_ONE_BYTE_STRING(
+#else
+constexpr v8::Local<v8::String> FIXED_ONE_BYTE_STRING(
+#endif
     v8::Isolate* isolate,
     const char(&data)[N]) {
   return OneByteString(isolate, data, N - 1);
@@ -469,6 +485,9 @@ inline v8::MaybeLocal<v8::Value> ToV8Value(v8::Local<v8::Context> context,
 template <typename T, typename U>
 inline v8::MaybeLocal<v8::Value> ToV8Value(v8::Local<v8::Context> context,
                                            const std::unordered_map<T, U>& map);
+
+template <typename T, size_t N>
+constexpr size_t arraysize(const T(&)[N]) { return N; }
 
 }  // namespace node
 

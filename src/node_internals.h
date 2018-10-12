@@ -33,6 +33,8 @@
 #include "v8.h"
 #include "tracing/trace_event.h"
 #include "node_api.h"
+#include "util.h"
+
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -223,9 +225,6 @@ bool SafeGetenv(const char* key, std::string* text);
 
 std::string GetHumanReadableProcessName();
 void GetHumanReadableProcessName(char (*name)[1024]);
-
-template <typename T, size_t N>
-constexpr size_t arraysize(const T(&)[N]) { return N; }
 
 #ifndef ROUND_UP
 # define ROUND_UP(a, b) ((a) % (b) ? ((a) + (b)) - ((a) % (b)) : (a))
