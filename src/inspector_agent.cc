@@ -6,7 +6,7 @@
 #include "inspector/worker_agent.h"
 #include "inspector/worker_inspector.h"
 #include "inspector_io.h"
-#include "node/inspector/protocol/Protocol.h"
+#include "protocol/Protocol.h"
 #include "node_errors.h"
 #include "node_internals.h"
 #include "node_url.h"
