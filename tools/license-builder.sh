@@ -63,6 +63,7 @@ addlicense "OpenSSL" "deps/openssl" \
            "$(sed -e '/^ \*\/$/,$d' -e '/^ [^*].*$/d' -e '/\/\*.*$/d' -e '/^$/d' -e 's/^[/ ]\* *//' ${rootdir}/deps/openssl/openssl/LICENSE)"
 addlicense "Punycode.js" "lib/punycode.js" \
            "$(curl -sL https://raw.githubusercontent.com/bestiejs/punycode.js/master/LICENSE-MIT.txt)"
+addlicense "range-v3" "deps/range-v3" "$(cat ${rootdir}/deps/range-v3/LICENSE.txt)"
 addlicense "V8" "deps/v8" "$(cat ${rootdir}/deps/v8/LICENSE)"
 addlicense "zlib" "deps/zlib" \
            "$(sed -e '/The data format used by the zlib library/,$d' -e 's/^\/\* *//' -e 's/^ *//' ${rootdir}/deps/zlib/zlib.h)"
