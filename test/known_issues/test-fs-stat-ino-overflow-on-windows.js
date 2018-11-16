@@ -10,6 +10,7 @@ const fs = require('fs');
 const promiseFs = require('fs').promises;
 const path = require('path');
 const tmpdir = require('../common/tmpdir');
+const { isDate } = require('util').types;
 
 tmpdir.refresh();
 
@@ -22,25 +23,8 @@ function getFilename() {
 }
 
 function verifyStats(bigintStats, numStats) {
-  const keys = [
-    'dev', 'mode', 'nlink', 'uid',
-    'gid', 'rdev', 'ino', 'size',
-  ];
-  if (!common.isWindows) {
-    keys.push('blocks', 'blksize');
-  }
-  for (const key of keys) {
-    const nVal = numStats[key];
-    const bVal = bigintStats[key];
-    assert.ok(
-      Number.isSafeInteger(nVal),
-      `numStats.${key}: ${nVal} is not a safe integer`
-    );
-    assert.strictEqual(
-      bigintStats[key], BigInt(numStats[key]),
-      `bigintStats.${key}: ${bVal} is not equal to numStats.${key}: ${nVal}`
-    );
-  }
+  assert.ok(Number.isSafeInteger(numStats.ino));
+  assert.strictEqual(bigintStats.ino, BigInt(numStats.ino));
 }
 
 {
