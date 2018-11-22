@@ -118,15 +118,15 @@ Depending on the host platform, the selection of toolchains may vary.
 
 #### Unix
 
-* GCC 4.9.4 or newer
-* Clang 3.4.2 or newer
+* GCC 8 or newer
+* Clang 8 or newer
 
 #### AIX
-* GCC 6.3 or newer
+* GCC 8 or newer
 
 #### Windows
 
-* Visual Studio 2017 with the Windows 10 SDK on a 64-bit host.
+* Visual Studio 2017 15.9 with the Windows 10 SDK on a 64-bit host.
 
 #### OpenSSL asm support
 
