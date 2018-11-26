@@ -1,6 +1,7 @@
 {
   'variables': {
-    'protocol_tool_path': '../../deps/v8/third_party/inspector_protocol',
+    'node_workspace_root_path': '../..',
+    'protocol_tool_path': '<(node_workspace_root_path)/deps/v8/third_party/inspector_protocol',
     'node_inspector_generated_path': '<(SHARED_INTERMEDIATE_DIR)/node_inspector',
     'node_inspector_generated_sources': [
       '<(node_inspector_generated_path)/protocol/Forward.h',
@@ -60,7 +61,7 @@
     {
       'action_name': 'concatenate_protocols',
       'inputs': [
-        '../../deps/v8/src/inspector/js_protocol.json',
+        '<(node_workspace_root_path)/deps/v8/src/inspector/js_protocol.json',
         '<(node_inspector_generated_path)/node_protocol.json',
       ],
       'outputs': [
@@ -68,14 +69,14 @@
       ],
       'action': [
         'python',
-        'tools/inspector_protocol/ConcatenateProtocols.py',
+        '<(protocol_tool_path)/ConcatenateProtocols.py',
         '<@(_inputs)',
         '<@(_outputs)',
       ],
     },
     {
       'action_name': 'v8_inspector_compress_protocol_json',
-      'process_outputs_as_sources': 0,
+      'process_outputs_as_sources': 1,
       'inputs': [
         '<(node_inspector_generated_path)/concatenated_protocol.json',
       ],
@@ -84,7 +85,7 @@
       ],
       'action': [
         'python',
-        'tools/compress_json.py',
+        '<(node_workspace_root_path)/tools/compress_json.py',
         '<@(_inputs)',
         '<@(_outputs)',
       ],
