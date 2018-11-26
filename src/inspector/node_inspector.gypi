@@ -51,8 +51,7 @@
   'copies': [
     {
       'files': [
-        'node_protocol_config.json',
-        'node_protocol.pdl',
+        'node_protocol.json',
       ],
       'destination': '<(node_inspector_generated_path)',
     }
