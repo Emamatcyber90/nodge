@@ -69,7 +69,7 @@
       ],
       'action': [
         'python',
-        '<(protocol_tool_path)/ConcatenateProtocols.py',
+        '<(protocol_tool_path)/concatenate_protocols.py',
         '<@(_inputs)',
         '<@(_outputs)',
       ],
