@@ -1,7 +1,6 @@
 {
   'variables': {
-    'protocol_tool_path': '../../tools/inspector_protocol',
-    'node_inspector_path': './',
+    'protocol_tool_path': '../../deps/v8/third_party/inspector_protocol',
     'node_inspector_generated_path': '<(SHARED_INTERMEDIATE_DIR)/node_inspector',
     'node_inspector_generated_sources': [
       '<(node_inspector_generated_path)/protocol/Forward.h',
@@ -51,8 +50,8 @@
   'copies': [
     {
       'files': [
-        '<(node_inspector_path)/node_protocol_config.json',
-        '<(node_inspector_path)/node_protocol.pdl',
+        'node_protocol_config.json',
+        'node_protocol.pdl',
       ],
       'destination': '<(node_inspector_generated_path)',
     }
