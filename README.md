@@ -1,3 +1,7 @@
+Just a playground
+
+<!--
+
 <p align="center">
   <a href="https://nodejs.org/">
     <img
@@ -587,6 +591,8 @@ Other keys used to sign some previous releases:
 * [Contributing to the project][]
 * [Working Groups][]
 * [Strategic Initiatives][]
+
+-->
 
 [Code of Conduct]: https://github.com/nodejs/admin/blob/master/CODE_OF_CONDUCT.md
 [Contributing to the project]: CONTRIBUTING.md
