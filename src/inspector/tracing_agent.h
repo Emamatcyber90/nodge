@@ -1,7 +1,7 @@
 #ifndef SRC_INSPECTOR_TRACING_AGENT_H_
 #define SRC_INSPECTOR_TRACING_AGENT_H_
 
-#include "protocol/NodeTracing.h"
+#include "inspector/node_protocol/NodeTracing.h"
 #include "tracing/agent.h"
 #include "vm.h"
 

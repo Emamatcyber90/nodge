@@ -461,6 +461,7 @@
         'deps/v8/include',
         'deps/zlib',
         'deps/range-v3',
+        'deps/GSL',
       ],
 
       'sources': [
